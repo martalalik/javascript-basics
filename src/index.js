@@ -3,7 +3,7 @@ import '../assets/css/style.css';
 const app = document.getElementById('app');
 app.innerHTML = '<h1>JavaScript Basics</h1>';
 
-// ----
+// ----------------------------------------------------------------
 // Conditional logic
 
 // console.log(1 == 1); // true
@@ -43,35 +43,63 @@ app.innerHTML = '<h1>JavaScript Basics</h1>';
 // console.log(!!''); // false
 // console.log(!!false); // false
 
+// ----------------------------------------------------------------
 
 // If, Else If and Else Statements
 
-const condition = false;
+// const condition = false;
+//
+// if (condition) {
+//   console.log('Yes'); // Yes if condition=true
+// } else {
+//   console.log('No'); // No if condition=false
+// }
+//
+// // shorter versions
+// // 1
+// if (condition) console.log('Yes');
+// else console.log('No');
+// // 2
+// condition ? console.log('Yes') : console.log('No'); // Ternary Operator
+//
+// const number = 99;
+// // const number = 1;
+// let result; // undefined
+//
+// if (number === 1) {
+//   result = 'One';
+// } else if (number === 99) {
+//   result = 'Ninety-Nine';
+// } else if (number === 1000) {
+//   result = 'One Thousand';
+// } else {
+//   result = 'No Match';
+// }
+// console.log(result);
 
-if (condition) {
-  console.log('Yes'); // Yes if condition=true
-} else {
-  console.log('No'); // No if condition=false
-}
+// ----------------------------------------------------------------
 
-// shorter versions
-// 1
-if (condition) console.log('Yes');
-else console.log('No');
-// 2
-condition ? console.log('Yes') : console.log('No');
+// Ternary Operator => condition ? true : false
 
-const number = 99;
-// const number = 1;
-let result; // undefined
+const number = 1;
+const result1 = number === 1 ? 'One' : 'No Match';
+console.log(result1);
 
-if (number === 1) {
-  result = 'One';
-} else if (number === 99) {
-  result = 'Ninety-Nine';
-} else if (number === 1000) {
-  result = 'One Thousand';
-} else {
-  result = 'No Match';
-}
-console.log(result);
+// with js expression
+const result2 = 'The Number is: ' + number === 1 ? 'One' : 'No Match'; // false - Condition is always false since types 'string' and 'number' have no overlap.
+console.log(result2);
+const result3 = 'The Number is: ' + (number === 1 ? 'One' : 'No Match'); // true - brackets creates expression on it's on, to evaluate on it's on.
+console.log(result3);
+
+// nesting; can get confusing
+const number1 = 99;
+const result4 =
+  number1 === 1
+    ? 'One'
+    : number1 === 99
+      ? 'Ninety-Nine'
+      : number1 === 1000
+      ? 'One Thousand'
+      : 'No Match';
+
+console.log(result4);
