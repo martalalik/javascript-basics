@@ -81,25 +81,75 @@ app.innerHTML = '<h1>JavaScript Basics</h1>';
 
 // Ternary Operator => condition ? true : false
 
-const number = 1;
-const result1 = number === 1 ? 'One' : 'No Match';
+// const number = 1;
+// const result1 = number === 1 ? 'One' : 'No Match';
+// console.log(result1);
+//
+// // with js expression
+// const result2 = 'The Number is: ' + number === 1 ? 'One' : 'No Match'; // false - Condition is always false since types 'string' and 'number' have no overlap.
+// console.log(result2);
+// const result3 = 'The Number is: ' + (number === 1 ? 'One' : 'No Match'); // true - brackets creates expression on it's on, to evaluate on it's on.
+// console.log(result3);
+//
+// // nesting; can get confusing
+// const number1 = 99;
+// const result4 =
+//   number1 === 1
+//     ? 'One'
+//     : number1 === 99
+//       ? 'Ninety-Nine'
+//       : number1 === 1000
+//       ? 'One Thousand'
+//       : 'No Match';
+//
+// console.log(result4);
+
+// ----------------------------------------------------------------
+
+// Switch Statements
+
+// const number = 1;
+const number = '1';
+let result;
+
+switch (number) {
+  case '1':
+    result = 'One';
+    break;
+  case 99:
+    result = 'Ninety-Nine';
+    break;
+  case 100:
+    result = 'One thousand';
+    break;
+  default:
+    result = 'No Match';
+}
+console.log(result);
+
+// creating a block scope - if you need to define a variable for a case
+const number1 = 99;
+let result1;
+
+switch (number1) {
+  case 1: {
+    const text = 'One';
+    result1 = text;
+    break;
+  }
+  case 99: {
+    const text = 'Ninety-Nine';
+    result1 = text;
+    break;
+  }
+  case 100: {
+    const text = 'One thousand';
+    result1 = text;
+    break;
+  }
+  default:
+    result1 = 'No Match';
+}
 console.log(result1);
 
-// with js expression
-const result2 = 'The Number is: ' + number === 1 ? 'One' : 'No Match'; // false - Condition is always false since types 'string' and 'number' have no overlap.
-console.log(result2);
-const result3 = 'The Number is: ' + (number === 1 ? 'One' : 'No Match'); // true - brackets creates expression on it's on, to evaluate on it's on.
-console.log(result3);
-
-// nesting; can get confusing
-const number1 = 99;
-const result4 =
-  number1 === 1
-    ? 'One'
-    : number1 === 99
-      ? 'Ninety-Nine'
-      : number1 === 1000
-      ? 'One Thousand'
-      : 'No Match';
-
-console.log(result4);
+// if take away {} - error: identifier 'text' has already been declared
