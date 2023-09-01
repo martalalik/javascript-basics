@@ -46,3 +46,32 @@ app.innerHTML = '<h1>JavaScript Basics</h1>';
 
 // If, Else If and Else Statements
 
+const condition = false;
+
+if (condition) {
+  console.log('Yes'); // Yes if condition=true
+} else {
+  console.log('No'); // No if condition=false
+}
+
+// shorter versions
+// 1
+if (condition) console.log('Yes');
+else console.log('No');
+// 2
+condition ? console.log('Yes') : console.log('No');
+
+const number = 99;
+// const number = 1;
+let result; // undefined
+
+if (number === 1) {
+  result = 'One';
+} else if (number === 99) {
+  result = 'Ninety-Nine';
+} else if (number === 1000) {
+  result = 'One Thousand';
+} else {
+  result = 'No Match';
+}
+console.log(result);
