@@ -7,23 +7,28 @@ app.innerHTML = '<h1>JavaScript Basics</h1>';
 // Numbers In-Depth
 // ----------------------------------------------------------------
 
-// Correctly Type-Checking Numbers
+// Exploring Number Methods
 
-console.log(typeof 99); // number
-console.log(typeof 99.88); // number
-console.log(99 instanceof Number); // false: 99 is literal value, is not an instance of Number
-console.log(Number('99') instanceof Number); // false (it doesn't matter if you pass 99 or '99')
-// this is because of the way that instances work and the 'new' keyword works.
-// new Number('99') : creating new instance
-console.log(new Number('99') instanceof Number); // true, there is no value in this check
-console.log({}.toString()); // [object Object] - this is irrelevant to numbers and is just a string. Here we first create a new object
-// This is the safest way to easy and reliably type check, any kind of value in JS and get very accurate representation of what it is.
-// instead of accessing object directly -> {}.toString(),
-// accessing object safely
-console.log(Object.prototype.toString()); // [object Object]. Here we access object directly without creating a new object
-console.log(Object.prototype.toString.call(99)); // [object Number] -> nice representation from the constructor of Object then the Number,
-// cal() -> change the way of executing toString() function.
-console.log(Object.prototype.toString.call(99).slice(8, -1)); // Number
-console.log(Object.prototype.toString.call(99).slice(8, -1) === 'Number'); // true, here switch case is created,
-// converting particular type into a string, then changing the execution context and takes the constructor value from the number,
-// then slicing values that are unwanted out of the string by cutting away [object ]
+console.log(Number.prototype); // in a console we see different properties and methods.
+// one of them -> [[Prototype]] and a value of object:  '[[Prototype]]: Object'. Opening this object there are more properties and methods.
+// this is how entire JS language is composed from properties to inheritance.
+// Because Number object has [[Prototype]] value of Object, essentially is saying that is inherited all of the values from the Object's prototype,
+// which is why it automatically has method toString(). Because Number it is whole individual thing it also has additional properties or methods that
+// make dealing with numbers much easier.
+// Object themselves don't deal with numbers, the Number object deals with numbers.
+
+// prototype methods
+// toFixed()
+console.log((99.12345678).toFixed()); // 99 -> returned value is string
+console.log((99.12345678).toFixed(2)); // 99.12 -> returned value is string
+// console.log(99.toFixed(2)); // parsing error: Identifier directly after number
+console.log(99..toFixed(2)); // 99.00 -> returned value is string, adding '.' fixed the error, but prettier should wrap this in brackets
+console.log((99).toFixed(2)); // 99.00 -> returned value is string
+console.log(parseFloat((99.12345678).toFixed(2))); // 99.12 -> because we parsed now we returned value is number
+// toPrecision()
+console.log((99.12345678).toPrecision(2)); // 99 -> returned value is string
+console.log((99.12345678).toPrecision(4)); // 99.12 -> returned value is string
+console.log(typeof (99.12345678).toPrecision(4)); // string
+// new Number() - dont use new Number() any way, this is exploration example to see how things work
+console.log(new Number(99).valueOf()); // 99 -> returned value is number, here is a fun factor and
+// this is used internally by JS convert Number objects to primitive values.
