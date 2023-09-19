@@ -7,38 +7,26 @@ app.innerHTML = '<h1>JavaScript Basics</h1>';
 // String In-Depth
 // ----------------------------------------------------------------
 
-// String Literal, Function and Constructor Syntax
+// String Properties and Indexes
 
-// String Literal - best to use
-// Quotes
-console.log('Pizza'); // Pizza
-console.log("Pizza 'Hello!'"); // Pizza 'Hello!' -> when using single quotes inside the string, mast use double quotes as a wrapper for the whole string.
-// or using \ backslash
-console.log('Pizza \'Hello!\''); // Pizza 'Hello! -> now i can have single quotes inside of single quotes
-console.log("Pizza \"Hello!\""); // Pizza 'Hello! -> now i can have double quotes inside of double quotes
-console.log('Pizza "Hello!"'); // Pizza 'Hello! -> this is preferred format.
+// Accessing property length
+console.log(new String(5599).length); // 4
+console.log('Pepperoni'.length); // 9 -> why enter length property on a string? Many reasons, check if someone entered a credit card number. Checking length property validate amount of numbers.
+// or Finding the last character in a string:
+// how to access first character
+console.log('Pepperoni'['length']); // 9
+console.log('Pepperoni'[length]); // 'P'
+console.log('Pepperoni'[0]); // 'P' - we can pass 0 as a number or a string. Number get converted to a string, and then will give back first property. Using numeric value is preferable.
+console.log('Pepperoni'['0']); // 'P'
 
-// Backticks & Concatenation
-const pizza = 'Peperoni';
-console.log('Pizza is: ' + pizza); // Pizza is Peperoni -> string concatenation - adding 2 strings.
-console.log(`Pizza is: ${pizza}`); // Pizza is Peperoni -> passing expression into a string. ${pizza} -> it is template literal string.
-// this gives added support for multi-line strings.
-console.log(`
+// how to access last character
+const pizza = 'Pepperoni';
+const pizza2 = 'P e p p e r o n i';
+console.log(pizza[0]); // 'P'
+console.log(pizza.length); // 9
+console.log(pizza[pizza.length]); // undefined -> this happens because indexes are 0 based. pizza.length gives 9, so 9 won't exist (0-8).
+console.log(pizza[pizza.length -1]); // 'i' -> -1 is a fix, will gives 8.
+console.log(pizza.charAt(0)); // 'P' -> alternative for getting first character, but [] are preferred. No need to call method on a string.
+console.log(pizza2.length); // 17 spaces also count as a length property.
 
-Pizza is: 
-
-${pizza}
-
-`);
-
-// Function - avoid
-// String() object
-console.log(String(55)); // 55 -> returned as a string.
-console.log(String(55 + 11 )); // 66 -> returned as a string.
-console.log(String(55 + '11' )); // 5511 -> returned as a string. Here happens string concatenation.
-console.log(String({name: 'Pepperoni'})); // [object Object] -> the string is calling that .toString() method and convert object to a string.
-console.log(String([1, 2, 3, 4])); // 1, 2, 3, 4 -> the same happens here like with an object.
-
-// new String() -> Constructor Syntax - avoid
-console.log(new String(55)); // String {'55'} --> 0: '5' 1: '5' [[PrimitiveValue]]: '55' -> Creates string wrapper,
 
