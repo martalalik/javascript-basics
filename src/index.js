@@ -4,31 +4,41 @@ const app = document.getElementById('app');
 app.innerHTML = '<h1>JavaScript Basics</h1>';
 
 // ----------------------------------------------------------------
-// Numbers In-Depth
+// String In-Depth
 // ----------------------------------------------------------------
 
-// Exploring Number Methods
+// String Literal, Function and Constructor Syntax
 
-console.log(Number.prototype); // in a console we see different properties and methods.
-// one of them -> [[Prototype]] and a value of object:  '[[Prototype]]: Object'. Opening this object there are more properties and methods.
-// this is how entire JS language is composed from properties to inheritance.
-// Because Number object has [[Prototype]] value of Object, essentially is saying that is inherited all of the values from the Object's prototype,
-// which is why it automatically has method toString(). Because Number it is whole individual thing it also has additional properties or methods that
-// make dealing with numbers much easier.
-// Object themselves don't deal with numbers, the Number object deals with numbers.
+// String Literal - best to use
+// Quotes
+console.log('Pizza'); // Pizza
+console.log("Pizza 'Hello!'"); // Pizza 'Hello!' -> when using single quotes inside the string, mast use double quotes as a wrapper for the whole string.
+// or using \ backslash
+console.log('Pizza \'Hello!\''); // Pizza 'Hello! -> now i can have single quotes inside of single quotes
+console.log("Pizza \"Hello!\""); // Pizza 'Hello! -> now i can have double quotes inside of double quotes
+console.log('Pizza "Hello!"'); // Pizza 'Hello! -> this is preferred format.
 
-// prototype methods
-// toFixed()
-console.log((99.12345678).toFixed()); // 99 -> returned value is string
-console.log((99.12345678).toFixed(2)); // 99.12 -> returned value is string
-// console.log(99.toFixed(2)); // parsing error: Identifier directly after number
-console.log(99..toFixed(2)); // 99.00 -> returned value is string, adding '.' fixed the error, but prettier should wrap this in brackets
-console.log((99).toFixed(2)); // 99.00 -> returned value is string
-console.log(parseFloat((99.12345678).toFixed(2))); // 99.12 -> because we parsed now we returned value is number
-// toPrecision()
-console.log((99.12345678).toPrecision(2)); // 99 -> returned value is string
-console.log((99.12345678).toPrecision(4)); // 99.12 -> returned value is string
-console.log(typeof (99.12345678).toPrecision(4)); // string
-// new Number() - dont use new Number() any way, this is exploration example to see how things work
-console.log(new Number(99).valueOf()); // 99 -> returned value is number, here is a fun factor and
-// this is used internally by JS convert Number objects to primitive values.
+// Backticks & Concatenation
+const pizza = 'Peperoni';
+console.log('Pizza is: ' + pizza); // Pizza is Peperoni -> string concatenation - adding 2 strings.
+console.log(`Pizza is: ${pizza}`); // Pizza is Peperoni -> passing expression into a string. ${pizza} -> it is template literal string.
+// this gives added support for multi-line strings.
+console.log(`
+
+Pizza is: 
+
+${pizza}
+
+`);
+
+// Function - avoid
+// String() object
+console.log(String(55)); // 55 -> returned as a string.
+console.log(String(55 + 11 )); // 66 -> returned as a string.
+console.log(String(55 + '11' )); // 5511 -> returned as a string. Here happens string concatenation.
+console.log(String({name: 'Pepperoni'})); // [object Object] -> the string is calling that .toString() method and convert object to a string.
+console.log(String([1, 2, 3, 4])); // 1, 2, 3, 4 -> the same happens here like with an object.
+
+// new String() -> Constructor Syntax - avoid
+console.log(new String(55)); // String {'55'} --> 0: '5' 1: '5' [[PrimitiveValue]]: '55' -> Creates string wrapper,
+
