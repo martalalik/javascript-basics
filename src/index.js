@@ -7,25 +7,12 @@ app.innerHTML = '<h1>JavaScript Basics</h1>';
 // Booleans In-Depth
 // ----------------------------------------------------------------
 
-// Boolean Literal, Function and Constructor Syntax
+// Correctly Type-Checking Booleans
 
-// Boolean Literal
-console.log(true, false); // true false
+console.log(typeof true); // boolean
+console.log(typeof false); // boolean
+console.log(true instanceof  Boolean); // false
+console.log(new Boolean('X') instanceof  Boolean); // true
+// with booleans there is no need to go over the top with type safety, but this is what can be done to.
+console.log(Object.prototype.toString.call(true)); // [object Boolean]
 
-// Function
-const arg1 = '';
-const arg2 = 'X';
-const arg3 = 0;
-const arg4 = 1;
-const arg5 = -1;
-console.log(Boolean('')); // false - not recommended to use it, unless there is need to perform a type conversion and coerce that type from a string where we want to see if something is empty.
-console.log(Boolean(arg1)); // false
-console.log(Boolean(arg2)); // true
-console.log(Boolean([])); // true
-console.log(Boolean({})); // true
-
-// Constructor Syntax
-console.log(new Boolean(arg2)); // [[PrimitiveValue]]: true
-console.log(new Boolean(arg3)); // [[PrimitiveValue]]: false
-console.log(new Boolean(arg4)); // [[PrimitiveValue]]: true
-console.log(new Boolean(arg5)); // [[PrimitiveValue]]: true
