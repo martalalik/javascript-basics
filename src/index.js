@@ -7,48 +7,41 @@ app.innerHTML = '<h1>JavaScript Basics</h1>';
 // Functions In-Depth
 // ----------------------------------------------------------------
 
-// Rest Parameters and Arguments
+// Function Return Values
 
-// Old way: using arguments is an old way of doing things.
-function makeCarPrice() {
-  // without specified parameters, passing arguments
-  console.log(arguments);
-  // to check if arguments is an array
-  console.log(Array.isArray(arguments)); // false
-  // but we can turn this into array, or iterate it.
-  console.log(arguments[0]); // 11
-  // 1: converting arguments into array - because it's array like  we can simply use Array.from() method, which returns a new array.
-  // 2: looping over arguments - .forEach
-  // Array.from(arguments).forEach(value => console.log(value)); // 11 44 55 99
-  // dynamically adding up values - .reduce() -> this method creates a new array based of all the items that we are passing through, so most likely we want return.
-  // prev, next - you can call it whatever
-  // Array.from(arguments).reduce((prev, next) => {
-  //   return prev + next;
-  // }); // because we are returning every single time here
-  // we can use const total
-  const total = Array.from(arguments).reduce((prev, next) => {
-    return prev + next;
-  });
-  // we can logout that one total
-  console.log(`Total: ${total}USD`); // Total: 231USD
-}
-
-makeCarPrice(11, 44, 55, 99, 22); // it is possible to pass arguments to the function without specifying parameters on the function. Console.log wil print [[Prototype]]: Object ->
-// it's array like, because it doesn't have all of those properties that a typical array might. No access to Array methods
-// 22 - was added
-
-// ----------------------------------------------------------------
-
-// New way: new way of doing it, is to use REST PARAMETER!!! new way of accessing arguments. And it is an array, which makes things easier.
-// REST PARAMETER - gives rest of the arguments, always need to ba at the end.
-function makeCarPriceRest(numberOne, ...params) {
-  console.log(numberOne, params); // 99, [[ Prototype]]: Array[88, 77, 11, 44] -> gave us an Array
-  // checking if its is an Array
-  console.log(Array.isArray(params)); // true
-  // now i can use directly .reduce() method
+// 1: With Function Declaration
+function makeCarPrice1(...params) {
   const total = params.reduce((prev, next) => prev + next);
-  console.log(`Total: ${total}USD`); // Total: 220USD
+  // console.log(`Total: ${total}`);
+  // IMPLICIT RETURN
+  // return; -> this return will always be added by a function under the hood after executing step by step the function body, even if you won't add it at the end of the function.
+  // Once it's returned, we then get the result bound to the variable, abd then can be used.
+  // And because we're not returning anything, it's an undefined value. It' just simply returning nothing, therefore it's undefined.
+  // adding return
+  return total;
 }
 
-makeCarPriceRest(99, 88, 77, 11, 44);
+const totalPrice1 = makeCarPrice1(11, 22, 33, 44, 55);
+console.log(`Total1: ${totalPrice1}`); // undefined; after adding return - Total1: 165
 
+// 2: Witch Arrow Function
+// one-liner
+const makeCarPrice2 = (...params) => params.reduce((prev, next) => prev + next); // no need return statement - it is one-liner
+const totalPrice2 = makeCarPrice2(11, 22, 33, 44, 55);
+console.log(`Total2: ${totalPrice2}`); // Total2: 165
+
+// with body
+const  makeCarPrice3 = (...params) => {
+  // const total = params.reduce((prev, next) => prev + next);
+  // return total; // need this return because we have function body here
+
+  // simplifying
+  return params.reduce((prev, next) => prev + next);
+}
+
+const totalPrice3 = makeCarPrice3(11, 22, 33, 44, 55);
+console.log(`Total3: ${totalPrice3}`); // undefined; after adding return - Total1: 165
+
+// 3: Calling Functions in string literals - we can call function directly in string literals, and this is good for debugging, because we avoid to create any constants. Because this functions return something, we can call them out.
+console.log(`Total4: ${makeCarPrice1(11, 22, 33, 44, 55)}`); // 165
+console.log(`Total5: ${makeCarPrice2(99, 77, 44)}`); // 220
