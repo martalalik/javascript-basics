@@ -7,27 +7,31 @@ app.innerHTML = '<h1>JavaScript Basics</h1>';
 // Functions In-Depth
 // ----------------------------------------------------------------
 
-// Immediately-Invoked Function Expressions (IIFE)
+// Functions and Callbacks
 
-// const carPartID = function () {}; // this function should be called the moment the JS parser hits it, without us having to invoke carPartID itself.
-// Creating some kind of private scope in JS (JS doesn't have a private scope), with emulate that using an IIFE, by wrapping function in ().
-// With () treats the contents of what's inside these () as an expression, which then allows us to, we can call (with () at the end) that function.
-// const carPartID = (function () {
-//     console.log('Hello!') // Hello!
-// })(); // this function calls itself
-// console.log(carPartID); // undefined. Here we're just logging out not calling carPartID function.
-// The reason we want to do this it creates a safe scope.
+// Passing a function as a function argument. We're passing through a whole function through another function. And internally invoke that function and pass some further info down to it.
+// When we pass a function through as an argument, this is called CALLBACK FUNCTION.
+function carParID(name, fn) {
+    const theID = `CAR_PART_123qwe`;
+    // Returning some kind of info, so we can give the person using our function, the ability to pass a function in. First, we need to set up our function.
+    fn(`${theID}_${name}`); // now we can call it here after setting up carPart. We pass theID through to our callback function. This function will be called only when we call carParID.
+    console.log(fn(`${theID}_${name}`)); // Car Part ID: CAR_PART_123qwe_Left Door
+    return fn(`${theID}_${name}`); // now when we return
+}
 
-// We can add arguments into this IIFE.
-// By adding id parameter, we're getting access to variable inside function
-// const carPartID = (function (id) {
-//     console.log(id) // qwe123
-// })('qwe123');
+// setting up our function.
+// function () {} anonymous function, because it doesn't have a name.
+// carParID('Left Door', function (id) {
+//     console.log(`Car Part ID: ${id}`); // Car Part ID: CAR_PART_123qwe_Left Door
+// });
+// const carPart = carParID('Left Door', function (id) {
+//     console.log(`Car Part ID: ${id}`); // Car Part ID: CAR_PART_123qwe_Left Door
+// });
+// console.log(carPart); // undefined
 
-const carPartID = (function (id) {
-    const theID = `CAR_PART_${id}`;
-    return name => `${theID}_${name.toUpperCase()}`;
-})('qwe123');
-
-console.log(carPartID('Left Door')); // CAR_PART_qwe123_LEFT DOOR
-console.log(carPartID('Right Door')); // CAR_PART_qwe123_RIGHT DOOR
+const carPart = carParID('Left Door', function (id) {
+    return `Car Part ID: ${id}`; // we can't return this value, it will be undefined. Because we are having our function definition, function getting called, but we ar not returning anything from carParID.
+});
+console.log(carPart); // undefined
+// after adding return in carParID
+console.log(carPart); // Car Part ID: CAR_PART_123qwe_Left Door
