@@ -7,35 +7,31 @@ app.innerHTML = '<h1>JavaScript Basics</h1>';
 // Objects In-Depth
 // ----------------------------------------------------------------
 
-// Object Literal, Function and Constructor Syntax
-// - Almost everything is an object in JS.
-// - Object stores a keyed collection.
-// - Object has an unordered collection, where we can use key and value pairs to access the data that we want.
+// Properties, Methods and Values
 
-// Object Literal - most recommend way to define an object
-const drink = {}; // new object is created
-console.log(drink); // {} -> it contains a prototype which ian object to with methods, which exist on this global object.
-
-const drink2 = {
+// in object: functions are called METHODS & we have PROPERTIES
+const drink = {
     id: '123qwe',
     name: 'Lemonade',
-    price: 99
-}; // this is stored in memory of JS of our app
-console.log(drink2); // shows content of the object, name: 'Lemonade'.
-
-// Difference between primitive values and object - OBJECTS ARE PASSED BY REFERENCE!!! - so if any reference will be changed, it's going to go all the way back to the beginning and change the initial object reference.
-const drinkReference = drink2; // the object is passed by reference
-drinkReference.name = 'Peach'; // we didn't change an object itself, because we have deliberately called it a reference.
-console.log(drink2); // name: 'Peach'
-console.log(drink2 === drinkReference); // true -> checking if this two objects are equal. In JS, two objects are never the same, unless they are in fact the same object.
-console.log({} === {}); // false -> shows how two objects are never the same, unless, they are the same as in drink2 === drinkReference
-
-// Function and Constructor Syntax
-console.log(new Object()); // {} - object literal is returned, [[Prototype]]: Object
-console.log(Object()); // {} - object literal is returned, does exactly the same as new Object()
-console.log(new Object() instanceof Object); // true
-console.log(Object() instanceof Object); // true -> Object() on its own, calls new Object internally.
-console.log({} instanceof Object); // true
-// Looking at the number
-console.log(new Number() instanceof Number); // true
-console.log(Number() instanceof Number); // false -> Number() is not an instance of Number
+    price: 99,
+    // we can use arrow function, but is not recommended where is a need to use 'this.'
+    // getDrinkDetails: () => `Drink ${this.name} (${this.price})`
+    // when use 'this'
+    getDrinkDetails() {
+        return `Drink ${this.name} (${this.price})`
+    },
+    // complex key par
+    // using space, for example, when we want to use key form another API and we want to store it as an object key. It is enough to wrap it in a string
+    'abs 123': 'Im a value!',
+    100: 'Im a number!'
+};
+console.log(drink);
+// console.log(drink.getDrinkDetails()); // error - using arrow function -> this.name is undefined, because it's not actually pointing to the object. 'this' keyword is driven from the item, which calls the function. drink.getDrinkDetails() is calling the function, therefore 'this' should point to the 'drink'. Also arrow function has no 'this' key word, it simply tries and essentially uses the one outside the scope.
+console.log(drink.getDrinkDetails()); // Drink Lemonade (99) - using function literal
+// accessing 'abs 123': 'Im a value!', we can use '.' notation, use [] instead
+console.log(drink["abs 123"]) // Im a value!
+console.log(drink[100]) // Im a number!
+console.log(drink['100']) // Im a number! -> we can use a string to, because JS will change any actual number to a string.
+// grabbing value from an object and accessing it from a variable
+const myID = 'id';
+console.log(drink[myID]); // 123qwe -> [] lookup is dynamical, if you want access string or number, [] is to go other wise we stick with '.' notation.
