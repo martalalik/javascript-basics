@@ -7,29 +7,39 @@ app.innerHTML = '<h1>JavaScript Basics</h1>';
 // Objects In-Depth
 // ----------------------------------------------------------------
 
-// Shorthand Properties and Methods
-// const  myID = 'qwe123';
-// const myName = 'Lemonade';
-// const myPrice = 99;
-// Shorthand Syntax
-const id = 'qwe123';
-const name = 'Lemonade';
-const price = 99;
-// creating property name dynamically - value dictate what the object key is called
-const someKey = 'name';
-const drink = {
-    // id: myID,
-    // name: myName,
-    // price: myPrice,
-    // Shorthand Syntax - if the value and the key have the same name
-    id, // passes in id, which creates property called id. And assigns it, whatever the value is.
-    // name,
-    price,
-    // creating property name dynamically
-    [someKey]: name,
-    gotDrinkDetails() {
-        return `Drink ${this.name} (${this.price})`
-    }
-};
-console.log(drink);
+// Destructuring Object Properties
 
+const drink = {
+    id: 'qwe123',
+    name: 'Lemonade',
+    price: {
+        sale: 99,
+        full: 129
+    },
+};
+const myDrinkId = drink.id;
+const myDrinkName = drink.name;
+const myDrinkSalePrice = drink.price.sale;
+console.log(myDrinkId);
+console.log(myDrinkName);
+console.log(myDrinkSalePrice);
+
+// Destructuring - works for objects and arrays -> allows creating dynamic variable
+// const { id, name, price} = drink;
+// console.log(id, name, price);
+// getting access to a nested object
+// const { id, name, price: {full}} = drink;
+// console.log(id, name, full);
+
+// if you want to rename any properties that exist, we do after we have destructed.
+// const id = 1234;
+// const { id: myId, name, price: {full}} = drink;
+// console.log(id, myId, name, full); // 1234 'qwe123' 'Lemonade' 129
+
+// further destruction
+// const { full, sale } = drink.price;
+// console.log(full, sale); // 129 99
+
+// Spread Operator -> ...rest -> always at the end
+const { id: myId, price: {full}, ...rest} = drink;
+console.log(myId, full, rest); // qwe123  129 {name: 'Lemonade'}
