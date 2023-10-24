@@ -7,7 +7,7 @@ app.innerHTML = '<h1>JavaScript Basics</h1>';
 // Objects In-Depth
 // ----------------------------------------------------------------
 
-// Adding and Updating Object Properties
+// Removing Object Properties
 
 const drink = {
     id: 'qwe123',
@@ -18,19 +18,22 @@ const drink = {
     },
 };
 
-// update existing property
-// drink.name = 'Peach';
-// console.log(drink.name); // Peach
+// delete - key word, only one way to delete property PERMANENTLY, but it is a SLOW way to do it, if we want to delete many properties.
+// delete drink.id;
+// console.log(drink); // {name: 'Lemonade', price: {…}}
+// we have to be mindful with the key word "delete"
+// console.log(drink.hasOwnProperty('id')); // false -> property "id" is permanently deleted
 
-// adding new property
-// drink.brand = 'My Drinks Co.';
-// console.log(drink); // {id: 'qwe123', name: 'Peach', price: {…}, brand: 'My Drinks Co.'}
+// better PERFORMANCE
+drink.id = undefined;
+// console.log(drink); // {id: undefined, name: 'Lemonade', price: {…}} -> id still exists but the property is undefined
+console.log(drink.hasOwnProperty('id')); // true -> property "id" is still existing, the value changed to undefined
+//
+// // checking if thr property exists
+// if(drink.id) {
+//     console.log('Has ID...'); // never came here because id is undefined
+// }
 
-// function to update and add property
-function propUpdate(prop, value) {
-    drink[prop] = value; // drink[prop] -> checks if property does exist, it's going to look up to the object and if property exists will update the value on that property, if property doesn't exist, it will create a new property.
-}
-
-propUpdate('brand', 'My Drinks Co.');
-propUpdate('name', 'Peach');
-console.log(drink); // {id: 'qwe123', name: 'Peach', price: {…}, brand: 'My Drinks Co.'}
+// DESTRUCTURING -> another way to delete property - IMMUTABLE PATTERN
+const { price, ...rest} = drink;
+console.log(price, rest); // {sale: 99, full: 129} {id: undefined, name: 'Lemonade'} -> price hasn't been deleted really, the drink object still remains intact.
