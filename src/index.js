@@ -7,23 +7,33 @@ app.innerHTML = '<h1>JavaScript Basics</h1>';
 // Arrays In-Depth
 // ----------------------------------------------------------------
 
-// Array Literal, Function and Constructor Syntax
+// Properties, Indexes and Elements
 
-// - Array is order list.
-// - Array is typically created for lists of things.
-// - Array is a special type of object.
-// - Array is passed by reference, which means that if we mutate a referenced array, it will update an original array.
-
-// LITERAL SYNTAX - []
+// ELEMENTS - things that we put in an array
 const drinks = ['Lemonade', 'Lime', 'Peach'];
-const drinksReference = drinks;
 
-console.log(drinks); // (3)['Lemonade', 'Lime', 'Peach']
-console.log(drinks === drinksReference); // true -> confirms that array is passed by reference. If drinksReference will be mutated it will make changes in the drinks array.
-console.log([] === []); // false -> no two arrays are the same unless they are the same reference like so: drinks === drinksReference
+// INDEXES
+// accessing arrays elements by using indexes lookups
+console.log(drinks); // 0:"Lemonade" 1:"Lime" 2:"Peach" -> array elements are indexed in order in the same way that strings also are.
+console.log(drinks[0]); // Lemonade -> use number format
+console.log(drinks['0']); // Lemonade
 
-// CONSTRUCTOR SYNTAX - new Array - do not use this approach
-console.log(new Array('Lemonade', 'Lime', 'Peach')); // (3)['Lemonade', 'Lime', 'Peach'] -> with the 'new' key work we create a new instance of an array.
+// accessing LAST ELEMENT in the array
+console.log(drinks); // 0:"Lemonade" 1:"Lime" 2:"Peach" length:3
+console.log(drinks[drinks.length - 1]); // 2:"Peach" -> this approach is dynamic
 
-// FUNCTION SYNTAX
-console.log(Array('Lemonade', 'Lime', 'Peach')); // (3)['Lemonade', 'Lime', 'Peach'] -> dropping the 'new' key word, but the Array() function will create a new instance under the hood.
+// accessing an item and replace the value
+drinks[0] = 'Diet Lemonade';
+console.log(drinks); // (3)['Diet Lemonade', 'Lime', 'Peach']
+
+// we can use string to set values in the array using words instead of numbers
+// drinks['favourite'] = 'Cola'; // here we also added a property 'favourite'. Avoid using this because it looks like an object, and maybe it should be and when we reset an array drinks.length = 0, the favourite:"Cola" will still exist on the array.
+// console.log(drinks); // ['Diet Lemonade', 'Lime', 'Peach', favourite: 'Cola'] -> arrays are a special type of object, has properties which are 0, 1, 2, favourite
+
+// RESET & EMPTY an array
+// 1. length - preferred
+// drinks.length = 0; // resetting array
+// console.log(drinks); // favourite:"Cola" (when favourite:"Cola") / []
+// 2. splice() -> removes elements
+drinks.splice(0, drinks.length); // 0 -> it starts at the front of the array. drinks.length -> as many items as that are in the length
+console.log(drinks); // []
