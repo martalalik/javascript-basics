@@ -4,32 +4,26 @@ const app = document.getElementById('app');
 app.innerHTML = '<h1>JavaScript Basics</h1>';
 
 // ----------------------------------------------------------------
-// Objects In-Depth
+// Arrays In-Depth
 // ----------------------------------------------------------------
 
-// Declarative Object Iteration
+// Array Literal, Function and Constructor Syntax
 
-const drink = {
-    id: 'qwe123',
-    name: 'Lemonade',
-    price: {
-        sale: 99,
-        full: 129
-    },
-};
+// - Array is order list.
+// - Array is typically created for lists of things.
+// - Array is a special type of object.
+// - Array is passed by reference, which means that if we mutate a referenced array, it will update an original array.
 
-// Object.keys(object)
-// console.log(Object.keys(drink)); // (3) -> array of all top level keys, but it does shallow iteration, it won't go deep into price. It doesn't look at the [[Prototype]], so it won't return any inherited properties.
-// because Object.keys(drink) returns array we can use forEach. This is a declarative way that we can iterate over a drink object.
-// Object.keys(drink).forEach(function(prop, index) {
-//     console.log(prop); // id name price
-//     console.log(index); // 0 1 2
-// });
-Object.keys(drink).forEach(function(prop) {
-    console.log(drink[prop]); // qwe123 Lemonade {sale: 99, full: 129} -> getting values, no inherit values
-});
-// arrow function
-Object.keys(drink).forEach(prop => console.log(drink[prop]));
+// LITERAL SYNTAX - []
+const drinks = ['Lemonade', 'Lime', 'Peach'];
+const drinksReference = drinks;
 
-// Object.entries(object)
-console.log(Object.entries(drink)); // 0:(2) ['id', 'qwe123'] 1:(2) ['name', 'Lemonade'] 2:(2) ['price', {…}] -> returns array of arrays
+console.log(drinks); // (3)['Lemonade', 'Lime', 'Peach']
+console.log(drinks === drinksReference); // true -> confirms that array is passed by reference. If drinksReference will be mutated it will make changes in the drinks array.
+console.log([] === []); // false -> no two arrays are the same unless they are the same reference like so: drinks === drinksReference
+
+// CONSTRUCTOR SYNTAX - new Array - do not use this approach
+console.log(new Array('Lemonade', 'Lime', 'Peach')); // (3)['Lemonade', 'Lime', 'Peach'] -> with the 'new' key work we create a new instance of an array.
+
+// FUNCTION SYNTAX
+console.log(Array('Lemonade', 'Lime', 'Peach')); // (3)['Lemonade', 'Lime', 'Peach'] -> dropping the 'new' key word, but the Array() function will create a new instance under the hood.
