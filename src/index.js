@@ -7,24 +7,41 @@ app.innerHTML = '<h1>JavaScript Basics</h1>';
 // Arrays In-Depth
 // ----------------------------------------------------------------
 
-// Destructuring Arrays
+// Adding Array Elements
 
-const drinks = [['Lemonade', 99], ['Lime', 89], ['Peach', 79]];
+const drinks = ['Lemonade', 'Lime', 'Peach'];
 
-const [ drinkOne, drinkTwo ] = drinks; // because in an array doesn't have a property name instead we have indexes, so we can call them whatever, as long they are distracted in the correct order.
-console.log(drinkOne, drinkTwo); // (2)['Lemonade', 99] (2) ['Lime', 89]
+// MUTATING EXISTING ARRAY - it is not a good approach because arrays are passed by reference. It mutates original array drinks.
 
-// destructing an array in an array
-const [ one, [a, b], three ] = drinks;
-console.log(a, b); // Lime 89
-console.log(one, three); //  (2)['Lemonade', 99] (2)['Peach', 79]
+// BEGINNING unshift() -> adds elements at the beginning of an array
+// drinks.unshift('Water');
+// console.log(drinks); // (4)['Water', 'Lemonade', 'Lime']
 
-// ...rest parameter -> will give us an array
-const [ first, second, ...rest ] = drinks;
-console.log(rest); // [Array(2)]
-console.log(first, second); //  (2)['Lemonade', 99] (2)['Lime', 89]
+// MIDDLE splice() -> removes elements from an array and, if necessary, inserts new elements in their place.
+const index = 1; //
+// drinks.splice(index, 0, 'Cola');
+// console.log(drinks); // (4)['Lemonade', 'Cola', 'Lime', 'Peach']
 
-// ignoring argument
-const [ o, [, bb], ...r ] = drinks;
-console.log(o, bb, r); // (2)['Lemonade', 99] 89 [Array(2)]
+// END push() -> adds the specified elements to the end of an array
+// drinks.push('Cola');
+// console.log(drinks); // (5)['Water', 'Lemonade', 'Lime', 'Cola']
+
+// IMMUTABLE -> expecting a new array back. We copy the original array and mutate copy of that array
+// BEGINNING & END
+const newDrinks = ['Water', ...drinks, 'Cola']; // copy drinks to new drinks and adds a new element
+// console.log(newDrinks); // (4)['Water', 'Lemonade', 'Lime', 'Peach', 'Cola']
+
+// RESTING an array
+newDrinks.length = 0;
+// console.log(newDrinks); // []
+
+// MIDDLE
+// we are cutting the array in half
+console.log([
+    ...drinks.splice(0, index), // ['Lemonade'] -> 0: capture the beginning of the array; index: deleting everything after a first element
+    'Mojito', // adding an element in the middle
+    ...drinks.splice(index -1) // (3)['Lemonade', 'Lime', 'Peach']
+]); // (4)['Lemonade', 'Mojito', 'Lime', 'Peach']
+
+console.log(drinks); // (3)['Lemonade', 'Lime', 'Peach'] -> when immutable, it shows that array is not touched
 
