@@ -7,24 +7,24 @@ app.innerHTML = '<h1>JavaScript Basics</h1>';
 // Arrays In-Depth
 // ----------------------------------------------------------------
 
-// Multi-dimensional Arrays
+// Destructuring Arrays
 
-// - Multi-dimensional Array is array in an array [[]]
+const drinks = [['Lemonade', 99], ['Lime', 89], ['Peach', 79]];
 
-// ELEMENTS - things that we put in an array
-const drinks = [['Lemonade', 99], ['Lime', 99], ['Peach', 79]];
-console.log(drinks); // (3)[Array(2), Array(2), Array(2)]
+const [ drinkOne, drinkTwo ] = drinks; // because in an array doesn't have a property name instead we have indexes, so we can call them whatever, as long they are distracted in the correct order.
+console.log(drinkOne, drinkTwo); // (2)['Lemonade', 99] (2) ['Lime', 89]
 
-// ACCESSING inner array
-const drinkOne = drinks[0];
-const drinkTwo = drinks[1];
-const drinkThree = drinks[2];
-console.log(drinkOne); // (2)['Lemonade', 99]
-console.log(drinkTwo); // (2)['Lime', 99]
-console.log(drinkThree); // (2)['Peach', 79]
-// login out the value
-console.log(`Drink: ${drinkOne[0]}, Price: ${drinkOne[1]}`); // Drink: Lemonade, Price: 99
-// getting value direct from drinks
-console.log(`Drink: ${drinks[0][0]}, Price: ${drinks[0][1]}`); // Drink: Lemonade, Price: 99
-//
+// destructing an array in an array
+const [ one, [a, b], three ] = drinks;
+console.log(a, b); // Lime 89
+console.log(one, three); //  (2)['Lemonade', 99] (2)['Peach', 79]
+
+// ...rest parameter -> will give us an array
+const [ first, second, ...rest ] = drinks;
+console.log(rest); // [Array(2)]
+console.log(first, second); //  (2)['Lemonade', 99] (2)['Lime', 89]
+
+// ignoring argument
+const [ o, [, bb], ...r ] = drinks;
+console.log(o, bb, r); // (2)['Lemonade', 99] 89 [Array(2)]
 
