@@ -26,4 +26,5 @@ console.log(drinkThree); // (2)['Peach', 79]
 console.log(`Drink: ${drinkOne[0]}, Price: ${drinkOne[1]}`); // Drink: Lemonade, Price: 99
 // getting value direct from drinks
 console.log(`Drink: ${drinks[0][0]}, Price: ${drinks[0][1]}`); // Drink: Lemonade, Price: 99
+//
 
