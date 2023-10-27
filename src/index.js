@@ -7,47 +7,35 @@ app.innerHTML = '<h1>JavaScript Basics</h1>';
 // Arrays In-Depth
 // ----------------------------------------------------------------
 
-// Removing Array Elements
+// Finding Array Elements
 
 const drinks = ['Lemonade', 'Lime', 'Peach'];
 
-// MUTABLE - it is not a good approach because arrays are passed by reference. It mutates original array drinks.
-// BEGINNING - shift() -> method removes the first element from an array and returns that removed element. This method changes the length of the array.
-// 1.
-// const removed = drinks.shift();
-// console.log(removed); // Lemonade
-// 2.
-// drinks.shift();
-// console.log(drinks); // Lemonade
+// indexOf(): number -> method returns the first index at which a given element can be found in the array, or -1 if it is not present. It Is case-sensitive. It is mainly for sor of primitives, such as strings and arrays. It won't help to deal with more complex data structures.
+const index = drinks.indexOf('Peach');
+console.log(index); // 2
+if(index !== -1) {
+    console.log(drinks[index]) // Peach
+}
 
-// MIDDLE
+// includes(): boolean -> method determines whether an array includes a certain value among its entries, returning true or false as appropriate. It Is case-sensitive.
+const included = drinks.includes('Peach');
+console.log(included); // true
 
-// END pop() -> method removes the last element from an array and returns that element. This method changes the length of the array.
-const removedEnd = drinks.pop();
-console.log(removedEnd); // Peach
+//  for more complicated data structure
+// 1. findIndex(): number -> method returns the index of the first element in an array that satisfies the provided testing function. If no elements satisfy the testing function, -1 is returned. Essentially, it gives the same behavior as the indexOf(). It Is case-sensitive.
+const drinksWithId = [
+    {id: 1, name: 'Lemonade'},
+    {id: 2, name: 'Lime'},
+    {id: 3, name: 'Peach'},
+];
+const idIndex = drinksWithId.findIndex(value => value.name === 'Peach');
+console.log(idIndex); // 2
+console.log(drinksWithId[idIndex]); // {id: 3, name: 'Peach'}
 
-// IMMUTABLE -> expecting a new array back. We copy the original array and mutate copy of that array
-// slice() -> remove an item from anywhere in array
-// 1. without defined index
-// const newDrinks = [
-//     ...drinks.slice(0, 0),
-//     ...drinks.slice(1)
-// ];
-// console.log(newDrinks); // (2)['Lime', 'Peach']
-// 2. with defined index
-// const index = 0;
-// const newDrinks = [
-//     ...drinks.slice(0, index),
-//     ...drinks.slice(index + 1)
-// ];
-// console.log(newDrinks); // (2)['Lime', 'Peach']
-// 3. end
-// const index = drinks.length -1;
-// const newDrinks = [
-//     ...drinks.slice(0, index),
-//     ...drinks.slice(index + 1)
-// ];
-// console.log(newDrinks); // (2)['Lemonade', 'Lime']
+// 2. find(): {} | undefined -> method returns the first element in the provided array that satisfies the provided testing function. If no values satisfy the testing function, undefined is returned. Simpler way to find index.
+const foundItem = drinksWithId.find(value => value.name === 'Peach');
+console.log(foundItem); // {id: 3, name: 'Peach'}
 
-console.log(drinks); // (3)['Lemonade', 'Lime', 'Peach'] -> when immutable, it shows that array is not touched
+console.log(drinks);
 
