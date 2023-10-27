@@ -7,35 +7,37 @@ app.innerHTML = '<h1>JavaScript Basics</h1>';
 // Arrays In-Depth
 // ----------------------------------------------------------------
 
-// Finding Array Elements
+// Shallow and Deep Array Cloning
 
-const drinks = ['Lemonade', 'Lime', 'Peach'];
+const drinks = [['Lemonade', 99], ['Lime', 89], ['Peach', 79]];
 
-// indexOf(): number -> method returns the first index at which a given element can be found in the array, or -1 if it is not present. It Is case-sensitive. It is mainly for sor of primitives, such as strings and arrays. It won't help to deal with more complex data structures.
-const index = drinks.indexOf('Peach');
-console.log(index); // 2
-if(index !== -1) {
-    console.log(drinks[index]) // Peach
-}
+// SHALLOW -> will go 1 level down, which means that it won't clone nested arrays, only the top level. That is why it will mutate nested elements in an array, even if we mutate values on a cloned array.
+// 1. cloning with spread operator: ...drinks
+// const drinksClone = [...drinks]; // this is a direct copy of the drinks array.
+// we are inside our top level drinks.
+// console.log(drinks[0]); // (2)['Lemonade', 99] -> accessing the first item of an array inside the array.
+// console.log(drinks[0][0]); // Lemonade -> accessing the string.
+// console.log(drinks[0][1]); // 99 -> accessing the number.
 
-// includes(): boolean -> method determines whether an array includes a certain value among its entries, returning true or false as appropriate. It Is case-sensitive.
-const included = drinks.includes('Peach');
-console.log(included); // true
+// looking how change effects arrays:
+// drinksClone[0][1] = 100;
+// console.log(drinksClone); // 0:(2) ['Lemonade', 100] ...
+// console.log(drinks); // 0:(2) ['Lemonade', 100] ... -> the original array gets mutated as well, this is not good behavior that needs to be avoided.
 
-//  for more complicated data structure
-// 1. findIndex(): number -> method returns the index of the first element in an array that satisfies the provided testing function. If no elements satisfy the testing function, -1 is returned. Essentially, it gives the same behavior as the indexOf(). It Is case-sensitive.
-const drinksWithId = [
-    {id: 1, name: 'Lemonade'},
-    {id: 2, name: 'Lime'},
-    {id: 3, name: 'Peach'},
-];
-const idIndex = drinksWithId.findIndex(value => value.name === 'Peach');
-console.log(idIndex); // 2
-console.log(drinksWithId[idIndex]); // {id: 3, name: 'Peach'}
+// 2. cloning with slice()
+// const drinksClone2 = drinks.slice(); // without passing any arguments, we clone the whole array.
+// drinksClone2[0][1] = 100;
+// console.log(drinksClone2); // 0:(2) ['Lemonade', 100] ...
+// console.log(drinks); // 0:(2) ['Lemonade', 100] ... -> the original array gets mutated as well, this is not good behavior that needs to be avoided.
 
-// 2. find(): {} | undefined -> method returns the first element in the provided array that satisfies the provided testing function. If no values satisfy the testing function, undefined is returned. Simpler way to find index.
-const foundItem = drinksWithId.find(value => value.name === 'Peach');
-console.log(foundItem); // {id: 3, name: 'Peach'}
+// 3. cloning with Array.from(object):
+// const drinksClone3 = Array.from(drinks);
+// drinksClone3[0][1] = 100;
+// console.log(drinksClone3); // 0:(2) ['Lemonade', 100] ...
+// console.log(drinks); // 0:(2) ['Lemonade', 100] ... -> the original array gets mutated as well, this is not good behavior that needs to be avoided.
 
-console.log(drinks);
-
+// DEEP
+const drinksClone = JSON.parse(JSON.stringify(drinks)); // need to parse it, because JSON.stringify() returns a string
+drinksClone[0][1] = 100;
+console.log(drinksClone); // 0:(2) ['Lemonade', 100] ...
+console.log(drinks); // 0:(2) ['Lemonade', 99] ...
