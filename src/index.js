@@ -7,10 +7,14 @@ app.innerHTML = '<h1>JavaScript Basics</h1>';
 // Arrays In-Depth
 // ----------------------------------------------------------------
 
-// Correctly Type-Checking Arrays
+// Imperative Array Iteration
 
-console.log(typeof []); // object
-console.log([] instanceof Array); // true, better option then typeof
-console.log(new Array() instanceof Array); // true
-console.log(Array.isArray([1, 2])); // true -> exceptional way for arrays
-console.log(Object.prototype.toString.call([])); // [object Array] -> bulletproof!!!
+const drinks = ['Pepsi', 'Lemonade', 'Cola'];
+
+// for(new_variable; instruction how long we want to continue the loop; increment 0){}
+for(let i = 0; i < drinks.length; i++) {
+    const drink = drinks[i];
+    if(drink === 'Lemonade') {
+        console.log(`Pour me a glass`);
+    }
+}
