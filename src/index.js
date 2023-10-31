@@ -7,20 +7,23 @@ app.innerHTML = '<h1>JavaScript Basics</h1>';
 // Arrays In-Depth
 // ----------------------------------------------------------------
 
-// Iteration with Break and Continue
+// Iteration with for…of
+
 
 const drinks = ['Pepsi', 'Lemonade', 'Cola'];
-let count = 0;
 
-// for(new_variable; instruction how long we want to continue the loop; increment 0){}
+// FOR loop
+// - ITERABLE -> here in the for look, we're just incrementing. And then using an array index
 for(let i = 0; i < drinks.length; i++) {
-    const drink = drinks[i];
-    if(drink === 'Lemonade') {
-        console.log(`Pour me a glass`);
-        // break;
-        continue; // does things opposite to a break statement
-    }
-    count++; // incrementing count at any point in time
+    console.log(drinks[i]); // Pepsi Lemonade Cola
 }
 
-console.log(count); // 3 -> without_break; 1 -> with_break; 2 -> with_continue
+// FOR...OF loop
+// - Cleaner then for loop, and it works a bit different
+// - use "const", so no mutation is performed.
+// - can iterate over strings, map sets, node lists, arrays.
+for(const drink of drinks) {
+    console.log(drink); // Pepsi Lemonade Cola
+}
+
+
