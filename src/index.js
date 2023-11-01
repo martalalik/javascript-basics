@@ -1,55 +1,47 @@
 import '../assets/css/style.css';
 
 const app = document.getElementById('app');
-app.innerHTML = '<h1>Array.prototype.reduce()</h1>';
+app.innerHTML = '<h1>Array.prototype.some()</h1>';
 
 // ----------------------------------------------------------------
 // Arrays In-Depth
 // ----------------------------------------------------------------
 
-// Exploring Array.reduce
+// Exploring Array.some
 
-// - array.reduce() -> is a method that exists on Array.prototype.
-// - Think: I want to take my array and reduce it to just ONE VALUE.
-// - reduce() is commonly used for performing things such as MATH expressions and EQUATIONS. Calculating total.
-// - syntax: const reducedValue = yourArray.reduce(() => {prev, nex, index, yourArray}, 0);
-// - How reduce() works:
-// - on the first loop is the number 1(prev) + 2(next) = 3(result). The next loop takes a previous result 3(prev result) + 3(next) = 6(result), and so on. This is known as an ACCUMULATING VALUE, it's accumulating the results of each callback.
-// [1, 2, 3].reduce((prev, next) => prev + next); // 6
-// - adding INITIAL VALUE 10
-// - in this case prev changed to 10, so the first loop will start with 10(initial value)
-// [1, 2, 3].reduce((prev, next) => prev + next, 10); // 16
-// - Checking what is happening, how the numbers are added, this can be done, with return, so we need get rid of implicit arrow function:
-// [1, 2, 3].reduce((prev, next) => {
-//     console.log(prev, next);
-//     return prev + next;
-// }, 10); // 10 + 1 // 11 + 2 // 13 + 3
-// - It returns any kind of value type: flattened arrays, data structures, concatenated strings, create new or merged objects, or anything else.
+// - Exists on Array.prototype.some().
+// - Tells whatever any element in our array passes a particular test, then will give true, otherwise false.
+// - Think: I want to check if any of my values in my array meet a specific condition. Either one of some values needs to pass to get tru in return.
+// - Doesn't modify the array.
+// - It returns only boolean.
+// - syntax: const returnedValues = array.some((value, index, array) => {...}, thisArg);
+// - It will loop through the array and do the checking on each value of an array.
 
 const items = [
-    { id: '🍔', name: 'Super Burger', price: 399 },
-    { id: '🍟', name: 'Jumbo Fries', price: 199 },
-    { id: '🥤', name: 'Big Slurp', price: 299 }
+    { id: '🍔', name: 'Super Burger', price: 399, promo: false },
+    { id: '🍟', name: 'Jumbo Fries', price: 199, promo: false },
+    { id: '🥤', name: 'Big Slurp', price: 299, promo: true }
 ];
 
-// array of numbers
-// creating an array of numbers
-// and we can chain the methods as well, because we're returning values
-// const reduced = items.map((item) => item.price).reduce((prev, next) => prev + next);
-// console.log(reduced); // (3)[399, 199, 299] -> when only map // 897 -> when reduce
+const isInPromo = items.some((item) => item.promo);
+console.log(isInPromo); // true
 
-// array of objects
-// when we want reduce() array of objects, prev will start wih an object, because we are not supplying an initial value. Here we can add as an initial value 0.
-const reduced = items.reduce((prev, next) => prev + next.price, 0); // 0 + 399 // 399 + 199 // 598 + 299
-console.log(reduced); // 897
-console.log(items); // (3)[{…}, {…}, {…}]
+// getting discount on products, when buy all and drinks in under promo
+// 1. find if there is anything in promo -> which we did with isInPromo
+// 2. getting a correct price.
+const total = isInPromo ? 600 : items.reduce((prev, next) => prev + next.price, 0);
+console.log(total); // 600
 
-// IMPERATIVE style - old ways
-// let reduced;
-// let prev = 0;
-// for(let i = 0; i < items.length; i++) {
-//     const next = items[i];
-//     prev = prev + next.price;
+// IMPERATIVE style
+// let isInPromo = false;
+// for(let i = 0; i< items.length; i++) {
+//     const item = items[i];
+//     if(item.promo) {
+//         isInPromo = true;
+//         break;
+//     }
 // }
-// reduced = prev;
-// console.log(reduced); // 897
+// const total = isInPromo ? 600 : items.reduce((prev, next) => prev + next.price, 0);
+// console.log(total); // 600
+
+console.log(items);
