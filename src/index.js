@@ -1,44 +1,53 @@
 import '../assets/css/style.css';
 
 const app = document.getElementById('app');
-app.innerHTML = '<h1>Array.prototype.forEach()</h1>';
+app.innerHTML = '<h1>Array.prototype.map()</h1>';
 
 // ----------------------------------------------------------------
 // Arrays In-Depth
 // ----------------------------------------------------------------
 
-// Exploring Array.forEach
+// Exploring Array.map
+// for BIG PROBLEMATIC, DATA STRUCTURE!!!
 
-// - forEach - is a method that exists on [[prototype]].
-// - array.forEach is more of an entry level looping tool that will iterate over your array.
-// - thinking of array.forEach is: I want to access my values in my array, one by one so that we can do something with them.
-// - syntax: items.forEach((value, index, array) => {...});
-// - doesn't return anything.
-// - allows to log out each item in any we that is chosen.
-// no "break" statement can be used.
-// no "continue" statement can be used.
+// DECLARATIVE style -> telling what to do.
+// - map() -> is a method that exists on array prototype.
+// - Allows to loop over an array and access each individual item much like a forEach. However, we can return newVALUES or newTYPES of the values for each item in array.
+// - Avery item that is returned it will give NEW ARRAY -> containing new copies or changes of each array element. You can return specific property as a new array.
+// - map() is a common solution to deal with lots of data structure problems. it allows a value of any type from primitive to objects, giving some great flexibility in the programming.
+// - Syntax: const returnedValue = items.map((value, index, array) => {...need to RETURN something}, thisArg);
+// - Using array.map() is called an IMMUTABLE PATTERN. As it creates a new array from an existing array. halfOffFries has nothing to do with items array.
+
 const items = [
     { id: '🍔', name: 'Super Burger', price: 399 },
     { id: '🍟', name: 'Jumbo Fries', price: 199 },
     { id: '🥤', name: 'Big Slurp', price: 299 }
 ];
 
-items.forEach((item) => {
-    app.innerHTML += `
-        <li>
-            ${item.id} ${item.name} ${(item.price / 100).toFixed(2)}
-        </li>
-    `;
+const halfOffFries = items.map((item) => {
+    if(item.id === '🍟'){
+        return {
+            ...item, // with ... operator we are getting the whole object
+            price: item.price / 2
+        };
+    }
+    // to fix undefined for a first and last element of an array, return item;
+    return item;
 });
 
-// IMPERATIVE way of iterating
-// - for loop that mimics forEach loop behavior.
+console.log(halfOffFries); // 0: undefined 1:{..., price: 99,5} 2:undefined -> without return item; // 0: {} 1:{..., price: 99,5} 2:{} -> with return item;
+
+// IMPERATIVE style -> explaining how to do it.
+// const halfOffFries = [];
 // for(let i = 0; i < items.length; i++) {
 //     const item = items[i];
-//     app.innerHTML += `
-//         <li>
-//            ${item.id} ${item.name} ${(item.price / 100).toFixed(2)}
-//         </li>
-//     `;
+//     if(item.id === '🍟'){
+//         halfOffFries.push({
+//             ...item,
+//             price: item.price / 2,
+//         });
+//     } else {
+//         halfOffFries.push(item);
+//     }
 // }
-
+// console.log(halfOffFries);
